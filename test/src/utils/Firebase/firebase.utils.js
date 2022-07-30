@@ -1,13 +1,13 @@
 import { initializeApp} from 'firebase/app'
 import { getAuth, signInWithRedirect ,signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 
-const firebaseConfig = {
-    apiKey: "AIzaSyB1-kB_TEfhduPqRfBbCCSbir-LhAq_LrM",
-    authDomain: "shop-ecommerce-3cd44.firebaseapp.com",
-    projectId: "shop-ecommerce-3cd44",
-    storageBucket: "shop-ecommerce-3cd44.appspot.com",
-    messagingSenderId: "1073525718520",
-    appId: "1:1073525718520:web:655925e3157df082276a0d"
+const firebaseConfig ={
+    apiKey: "AIzaSyCQoQ89UFskes6yhO-6Q_Im5htCA-tmaH8",
+    authDomain: "e-commerce-fdf6f.firebaseapp.com",
+    projectId: "e-commerce-fdf6f",
+    storageBucket: "e-commerce-fdf6f.appspot.com",
+    messagingSenderId: "281515855856",
+    appId: "1:281515855856:web:b35f90a046b42a4b679735"
   };
 
 const FirebaseApp = initializeApp(firebaseConfig)  
