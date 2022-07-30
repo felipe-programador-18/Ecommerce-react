@@ -9,10 +9,11 @@ const Navigation = () => {
         <div className="navigation" >  
          <Link  className="logo-container" to='/' >       
          <CrownLogo className="logo"  />
-
          </Link>
+
           <div className="nav-links-container" >
            <Link className="nav-link" to='/shop' >Shop</Link>
+           <Link className="nav-link" to='/sign' >Sing-In</Link>
           </div>
 
         </div>
