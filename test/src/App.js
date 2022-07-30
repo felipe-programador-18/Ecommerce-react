@@ -1,7 +1,7 @@
 import "./directory/directory.styles.scss"
 import { Routes, Route, Outlet } from "react-router-dom";
-import Home from "./routes/home.component";
-import NotFoundHere from "./routes/notfound";
+import Home from "./routes/home/home.component";
+import NotFoundHere from "./routes/home/notfound";
 import Navigation from "./routes/navigation/navigation";
 
 
