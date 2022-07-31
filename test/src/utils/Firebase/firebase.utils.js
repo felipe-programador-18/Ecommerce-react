@@ -1,5 +1,13 @@
 import { initializeApp} from 'firebase/app'
-import { getAuth, signInWithRedirect ,signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth ,signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+
+import  {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from 'firebase/firestore'
+
 
 const firebaseConfig ={
     apiKey: "AIzaSyCQoQ89UFskes6yhO-6Q_Im5htCA-tmaH8",
@@ -12,12 +20,45 @@ const firebaseConfig ={
 
 const FirebaseApp = initializeApp(firebaseConfig)  
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
+const googleprovider = new GoogleAuthProvider();
+googleprovider.setCustomParameters({
     prompt:"select_account"
 })
 
-
 export const auth = getAuth();
-export const singInWithGooglePopup= () => signInWithPopup(auth, provider)  
+//two kinds to sing in google and another is with redirect google
+export const singInWithGooglePopup= () => signInWithPopup(auth, googleprovider)  
 
+//export const singGoogleWithRed= () =>  signInWithRedirect(auth,googleprovider)
+
+
+
+
+
+export const db = getFirestore()
+
+
+// here i created to verify my authentication with firebase and google!
+export const createUserWithAuth = async (userauth) => {  
+  const getRefferedDoc = doc(db,'users', userauth.uid )
+    
+  const userSnapshot = await getDoc( getRefferedDoc)
+  
+  if(!userSnapshot.exists()){
+   const {displayName, email } = userauth;
+
+   const createdAt = new Date()
+   try {
+     await setDoc(getRefferedDoc, {
+       displayName,
+        email,
+        createdAt
+     })
+   } catch (error) {
+      console.log("error in creating users", error.message)
+   }
+  }
+  return getRefferedDoc;
+
+
+}
