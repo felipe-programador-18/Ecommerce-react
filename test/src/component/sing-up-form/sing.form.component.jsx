@@ -1,5 +1,8 @@
-import { createAuthWithEmail } from "../../utils/Firebase/firebase.utils"
+import { createAuthWithEmail, createUserWithAuth } from "../../utils/Firebase/firebase.utils"
 import { useState } from "react"
+
+import FormInput from "../../form-input/form-component"
+
 
 const defaultForm = {
     displayName:'',
@@ -13,14 +16,33 @@ const SingInForm = () => {
   const {displayName, email, password, confirmPassword} = formAll;
   
 
-  console.log('what have here', formAll )
-  const HandSubmit =  async(event) => {
+  
+  const resetFieldForm = () => {
+    setFormAll(defaultForm)
+  }
+  
+  
+  
+  const HandSubmit = async (event) => {
     event.preventDefault()
-    if(!email || !password){
-      return await createAuthWithEmail()
+    if(password !== confirmPassword){
+     alert('password do no match')
+     return;
     }
-     
-    const res = await  createAuthWithEmail()
+   
+    try {
+       const {user} = await createAuthWithEmail(email, password);  
+       await createUserWithAuth(user, {displayName})
+       resetFieldForm()
+
+    } catch (error) {
+        if(error.code === "auth/email-already-in-use"){
+            alert('cannot create user, email already in use. ')
+        }else {
+        console.log("encounter error here..", error)
+        }
+    }
+
   }
   
   
@@ -32,39 +54,46 @@ const SingInForm = () => {
 
     return (<div>
         <h1> sing in with your email and password</h1>
-        <form onSubmit={()=> {}}>
-            <label> Display Name
-                <input type="text"
+        <form onSubmit={HandSubmit}>
+           
+                <FormInput 
+                label='Display Name'
+                type="text"
                 onChange={HandChange}
                 name='displayName'
                 value={displayName}
                required/>
-            </label>
+           
 
-            <label> Your E-mail
-                <input type="email"
+          
+                <FormInput 
+                label='Your E-mail'
+                type="email"
                 name="email"
                 value={email}
                 onChange={HandChange}
                 required />
-            </label> 
           
-            <label>Password
-                <input type="password"
+          
+            
+                <FormInput
+                label= "Password"
+                type="password"
                 name="password"
                 value={password}
                 onChange={HandChange}
                 required />
-            </label>
+       
             
-            <label>Confirm Password
-                <input type="password"
+            
+                <FormInput
+                label='Confirm Password'
+                type="password"
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={HandChange}
                 required />
             
-            </label>
             <button type="submit" >Sing In</button>
         
         </form>

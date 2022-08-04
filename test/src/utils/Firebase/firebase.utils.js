@@ -39,7 +39,7 @@ export const db = getFirestore()
 
 
 // here i created to verify my authentication with firebase and google!
-export const createUserWithAuth = async (userauth) => {  
+export const createUserWithAuth = async (userauth, additionalInformation={}) => {  
   const getRefferedDoc = doc(db,'users', userauth.uid )
     
   const userSnapshot = await getDoc( getRefferedDoc)
@@ -52,7 +52,8 @@ export const createUserWithAuth = async (userauth) => {
      await setDoc(getRefferedDoc, {
        displayName,
         email,
-        createdAt
+        createdAt,
+        ...additionalInformation
      })
    } catch (error) {
       console.log("error in creating users", error.message)

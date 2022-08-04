@@ -3,8 +3,6 @@ import SingInForm from '../../component/sing-up-form/sing.form.component';
 import {singInWithGooglePopup, createUserWithAuth,} from '../../utils/Firebase/firebase.utils'
 
 
-
-
 const SingIn = () => {
   
     const loginGoogle = async () => {
