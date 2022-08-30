@@ -1,4 +1,4 @@
-import "./directory/directory.styles.scss"
+import "./component/directory/directory.styles.scss"
 import { Routes, Route } from "react-router-dom";
 import Home from "./routes/home/home.component";
 import NotFoundHere from "./routes/home/notfound";
