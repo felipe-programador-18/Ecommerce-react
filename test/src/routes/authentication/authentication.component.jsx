@@ -1,7 +1,9 @@
 
-import SingInForm from '../../component/sing-in-form/sing-in.form.component';
+import SingUpForm from '../../component/sing-up-form/sing-up.form.component';
+
 import {singInWithGooglePopup, createUserWithAuth,} from '../../utils/Firebase/firebase.utils'
 
+import SingAnotherIn from '../../component/sing-in-component/sing-in-component';
 
 const Authentication = () => {
   
@@ -17,8 +19,11 @@ const Authentication = () => {
 
     return( <div>
        <h1>Sing in page!</h1>
-       <button className='btn btn-primary' onClick={loginGoogle} > Sing in with google popup</button>
-       <SingInForm/>
+       <SingAnotherIn/>
+       
+       { /* <button className='btn btn-primary' onClick={loginGoogle} > Sing in with google popup</button>
+        */}
+       <SingUpForm/>
 
     </div>)
 }
